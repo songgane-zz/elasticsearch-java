@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>songgane.elasticsearch</groupId>
-    <artifactId>client-java</artifactId>
+    <artifactId>elasticsearch-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
