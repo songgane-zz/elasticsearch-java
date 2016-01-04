@@ -2,10 +2,13 @@ package songgane.elasticsearch.client;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.percolate.PercolateResponse;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import songgane.elasticsearch.percolate.PercolatorServiceImpl;
+import songgane.elasticsearch.search.SearchService;
+import songgane.elasticsearch.search.SearchServiceImpl;
 import songgane.elasticsearch.util.ConnectionUtil;
 
 import java.io.IOException;
@@ -39,6 +42,10 @@ public class ESClient {
             //the query in the percolator
             System.out.println(match.getIndex() + "," + match.getId());
         }
+
+        SearchService search = new SearchServiceImpl(client);
+        SearchResponse searchResponse = search.matchQuery("customers", "customer", "full_name", "jaechang song", 10);
+        System.out.println(searchResponse.toString());
 
         System.out.println("end");
 
