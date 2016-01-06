@@ -14,16 +14,18 @@ public class SearchServiceImpl implements SearchService {
         this.client = client;
     }
 
-    public SearchResponse matchQuery(String index, String type, String key, String value, int size) {
-        QueryBuilder qb = org.elasticsearch.index.query.QueryBuilders.matchQuery(key, value);
-
+    // https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html
+    // https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-query-dsl.html
+    public SearchResponse search(String index, String type, QueryBuilder query, QueryBuilder filter, int from, int size, boolean explain) {
         return client
                 .prepareSearch(index)
                 .setTypes(type)
-                .setQuery(qb)
-//                .setPostFilter(fb)
-//                .addAggregation(
-//                        AggregationBuilders.avg("cpu_average").field("value"))
-                .setSize(size).execute().actionGet();
+                .setQuery(query)
+                .setPostFilter(filter)
+                .setFrom(from)
+                .setSize(size)
+                .setExplain(explain)
+                .execute()
+                .actionGet();
     }
 }

@@ -9,4 +9,6 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
  */
 public interface PercolatorService {
     public PercolateResponse percolate(Client client, String index, String type, XContentBuilder docBuilder);
+
+    public PercolateResponse percolate(Client client, String index, String type, String source);
 }

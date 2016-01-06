@@ -6,6 +6,8 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import songgane.elasticsearch.percolate.PercolatorServiceImpl;
 import songgane.elasticsearch.search.SearchService;
 import songgane.elasticsearch.search.SearchServiceImpl;
@@ -44,7 +46,8 @@ public class ESClient {
         }
 
         SearchService search = new SearchServiceImpl(client);
-        SearchResponse searchResponse = search.matchQuery("customers", "customer", "full_name", "jaechang song", 10);
+        QueryBuilder query = QueryBuilders.matchQuery("full_name", "jaechang song");
+        SearchResponse searchResponse = search.search("customers", "customer", query, null, 0, 10, true);
         System.out.println(searchResponse.toString());
 
         System.out.println("end");
