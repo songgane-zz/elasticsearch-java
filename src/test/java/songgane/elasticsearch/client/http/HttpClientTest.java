@@ -6,8 +6,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.junit.Before;
 import org.junit.Test;
-import songgane.elasticsearch.client.http.HttpClientFactory;
 
 import java.io.IOException;
 
@@ -15,6 +15,11 @@ import java.io.IOException;
  * Created by songgane on 2016. 3. 7..
  */
 public class HttpClientTest {
+    @Before
+    public void setup() {
+
+    }
+
     @Test
     public void testHttpClient() {
         CloseableHttpClient client = null;

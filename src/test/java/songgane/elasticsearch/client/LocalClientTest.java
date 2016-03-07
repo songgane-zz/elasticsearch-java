@@ -8,14 +8,13 @@ import songgane.elasticsearch.client.http.LocalClient;
 import java.io.IOException;
 
 /**
- * Created by songgane on 2016. 1. 14..
+ * Created by songgane on 2016. 3. 7..
  */
-public class NativeClientTest {
-
+public class LocalClientTest {
     @Test
     public void testNativeClient() throws IOException {
         // on startup
-        Client client = new NativeClient().getClient("songgane", "localhost", 9300);
+        Client client = new LocalClient().getClient("songgane");
 
         // Get
         GetResponse res01 = client.prepareGet("customers", "customer", "1").get();

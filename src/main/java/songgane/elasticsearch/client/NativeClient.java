@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 /**
  * Creaing a native Elasticsearch Client
- *
+ * <p>
  * Created by songgane on 2015. 12. 30..
  */
 public class NativeClient {
