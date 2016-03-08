@@ -67,7 +67,7 @@ public class DocumentServiceImpl implements DocumentService {
                 .get();
     }
 
-    public BulkResponse bulk(BulkRequestBuilder builder) {
-        return client.prepareBulk().get();
+    public BulkResponse bulk(BulkRequestBuilder builder) throws ExecutionException, InterruptedException {
+        return builder.execute().get();
     }
 }
