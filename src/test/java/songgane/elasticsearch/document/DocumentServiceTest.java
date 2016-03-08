@@ -1,5 +1,7 @@
 package songgane.elasticsearch.document;
 
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
@@ -12,6 +14,7 @@ import songgane.elasticsearch.client.NativeClient;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -63,7 +66,21 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void testBulk() {
+    public void testBulk() throws ExecutionException, InterruptedException {
+        BulkRequestBuilder builder = client.prepareBulk();
+        builder.add(client.prepareIndex(INDEX_NAME, TYPE_NAME, null)
+                .setSource("name", "bulk1"));
+        builder.add(client.prepareIndex(INDEX_NAME, TYPE_NAME, null)
+                .setSource("name", "bulk2"));
+        builder.add(client.prepareIndex(INDEX_NAME, TYPE_NAME, null)
+                .setSource("name", "bulk3"));
+        builder.add(client.prepareIndex(INDEX_NAME, TYPE_NAME, null)
+                .setSource("name", "bulk4"));
 
+        System.out.println("Number of actions for update: "
+                + builder.numberOfActions());
+
+//        builder.execute();
+        doc.bulk(builder);
     }
 }
